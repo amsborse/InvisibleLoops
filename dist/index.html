@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      (function () {
+        try {
+          var key = "theme";
+          var stored = localStorage.getItem(key);
+          var mode;
+          if (stored === "dayThinking" || stored === "day" || stored === "light") mode = "dayThinking";
+          else if (stored === "nightReading" || stored === "night" || stored === "dark") mode = "nightReading";
+          else mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "nightReading" : "dayThinking";
+
+          var root = document.documentElement;
+          root.classList.toggle("dark", mode === "nightReading");
+          root.setAttribute("data-theme-mode", mode);
+        } catch (e) {
+          // no-op
+        }
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invisible Loops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" crossorigin src="/assets/index-BU1aSEns.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BzjWxMCs.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
