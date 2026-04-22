@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { InfinityGraphic } from "./infinity-reference/InfinityGraphic";
+import { Link } from "react-router-dom";
+import { InfinityGraphic } from "@amsborse/cosmic-ui";
+import { PREMIUM_ARTICLE_HREF } from "../data/premiumArticle";
 import { useTheme } from "../hooks/useTheme";
 
 export function Hero() {
   const { currentTheme, isNightReading } = useTheme();
 
   return (
-    <section id="experience" className="mx-auto grid w-full max-w-7xl gap-10 px-5 pb-16 pt-12 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14 lg:px-10 lg:pb-24">
+    <section id="experience" className="mx-auto grid w-full max-w-[88rem] gap-10 px-5 pb-16 pt-12 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14 lg:px-10 lg:pb-24">
       <div>
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -31,14 +33,14 @@ export function Hero() {
           className="mt-5 text-balance font-display text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem] lg:leading-[1.02]"
           style={{ color: currentTheme.colors.textPrimary }}
         >
-          <a
-            href="/article-1"
+          <Link
+            to={PREMIUM_ARTICLE_HREF}
             className="underline-offset-8 transition-colors hover:underline"
             style={{ color: currentTheme.colors.accentA }}
             aria-label="Open article: No one is coming to save you"
           >
             No one is coming to save you.
-          </a>{" "}
+          </Link>{" "}
           Build a reading experience that makes ideas unforgettable.
         </motion.h1>
 
@@ -58,8 +60,8 @@ export function Hero() {
           transition={{ duration: currentTheme.motion.slow + 0.12, ease: currentTheme.motion.ease }}
           className="mt-10 flex flex-wrap gap-4"
         >
-          <a
-            href="/article-1"
+          <Link
+            to={PREMIUM_ARTICLE_HREF}
             className="group inline-flex items-center gap-2 rounded-full border px-6 py-3.5 text-sm font-semibold"
             style={{
               borderColor: currentTheme.colors.border,
@@ -70,10 +72,10 @@ export function Hero() {
           >
             Read first article
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
+          </Link>
 
-          <button
-            type="button"
+          <Link
+            to="/articles"
             className="rounded-full border px-6 py-3.5 text-sm font-medium"
             style={{
               borderColor: currentTheme.colors.border,
@@ -82,7 +84,7 @@ export function Hero() {
             }}
           >
             Explore reading system
-          </button>
+          </Link>
         </motion.div>
       </div>
 

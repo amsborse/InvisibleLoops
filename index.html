@@ -6,14 +6,15 @@
         try {
           var key = "theme";
           var stored = localStorage.getItem(key);
-          var mode;
-          if (stored === "dayThinking" || stored === "day" || stored === "light") mode = "dayThinking";
-          else if (stored === "nightReading" || stored === "night" || stored === "dark") mode = "nightReading";
-          else mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "nightReading" : "dayThinking";
+          var theme;
+          if (stored === "light" || stored === "dayThinking" || stored === "day") theme = "light";
+          else if (stored === "dark" || stored === "nightReading" || stored === "night") theme = "dark";
+          else theme = "dark"; // default to dark per product spec
 
           var root = document.documentElement;
-          root.classList.toggle("dark", mode === "nightReading");
-          root.setAttribute("data-theme-mode", mode);
+          root.setAttribute("data-theme", theme);
+          root.classList.toggle("dark", theme === "dark");
+          root.setAttribute("data-theme-mode", theme === "dark" ? "nightReading" : "dayThinking");
         } catch (e) {
           // no-op
         }

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Moon, Sun } from "lucide-react";
-import { InfinityGraphic } from "./InfinityGraphic";
+import { InfinityGraphic } from "@amsborse/cosmic-ui";
 
 type ShowcaseCardProps = {
   mode: "dark" | "light";

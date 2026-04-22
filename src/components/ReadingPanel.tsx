@@ -1,5 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "../hooks/useTheme";
+import { Link } from "react-router-dom";
+import { PREMIUM_ARTICLE_HREF } from "../data/premiumArticle";
 import type { ArticleScene } from "../data/articleScenes";
 
 type ReadingPanelProps = {
@@ -38,9 +40,9 @@ export function ReadingPanel({ scene }: ReadingPanelProps) {
           </p>
 
           <div className="mt-9 flex flex-wrap gap-3">
-            <button
-              type="button"
-              className="rounded-full border px-5 py-3 text-sm font-medium"
+            <Link
+              to={PREMIUM_ARTICLE_HREF}
+              className="rounded-full border px-5 py-3 text-sm font-medium transition-colors hover:opacity-95"
               style={{
                 borderColor: currentTheme.colors.border,
                 background: currentTheme.colors.surfaceStrong,
@@ -48,7 +50,7 @@ export function ReadingPanel({ scene }: ReadingPanelProps) {
               }}
             >
               Continue reading
-            </button>
+            </Link>
             <button type="button" className="rounded-full border border-transparent px-5 py-3 text-sm font-medium" style={{ color: currentTheme.colors.textSecondary }}>
               View article architecture
             </button>

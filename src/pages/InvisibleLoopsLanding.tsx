@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import { CTASection } from "../components/CTASection";
-import { ExperimentalFiberInfinitySection } from "../components/experimental/ExperimentalFiberInfinitySection";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
 import { PrinciplesSection } from "../components/PrinciplesSection";
 import { PrototypePreview } from "../components/PrototypePreview";
 import { ScrollProgress } from "../components/ScrollProgress";
 import { SiteBackground } from "../components/SiteBackground";
+import { PREMIUM_ARTICLE_HREF } from "../data/premiumArticle";
 import { useTheme } from "../hooks/useTheme";
 
 export default function InvisibleLoopsLanding() {
@@ -29,8 +30,8 @@ export default function InvisibleLoopsLanding() {
         <Hero />
 
         <section className="mx-auto max-w-7xl px-5 pt-2 sm:px-6 lg:px-10">
-          <a
-            href="/article-1"
+          <Link
+            to={PREMIUM_ARTICLE_HREF}
             className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] transition-all hover:-translate-y-0.5"
             style={{
               borderColor: currentTheme.colors.border,
@@ -40,10 +41,9 @@ export default function InvisibleLoopsLanding() {
             }}
           >
             Read First Article
-          </a>
+          </Link>
         </section>
 
-        <ExperimentalFiberInfinitySection />
         <PrototypePreview />
         <PrinciplesSection />
         <CTASection />

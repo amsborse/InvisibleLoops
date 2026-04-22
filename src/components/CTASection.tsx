@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import { PREMIUM_ARTICLE_HREF } from "../data/premiumArticle";
 
 export function CTASection() {
   const { currentTheme } = useTheme();
@@ -29,20 +31,24 @@ export function CTASection() {
           Turn concept-heavy writing into a reading sequence with cinematic timing, visual scaffolding, and emotional pacing.
         </p>
 
-        <motion.button
-          type="button"
+        <motion.div
           whileHover={{ y: currentTheme.motion.hoverLift * 0.4, scale: 1.01 }}
           transition={{ duration: currentTheme.motion.fast, ease: currentTheme.motion.ease }}
-          className="mt-8 inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold text-white"
-          style={{
-            borderColor: currentTheme.colors.border,
-            background: `linear-gradient(180deg, ${currentTheme.colors.accentA}, ${currentTheme.colors.accentB})`,
-            boxShadow: `0 16px 38px -22px ${currentTheme.colors.shadowColor}`,
-          }}
+          className="mt-8 inline-block"
         >
-          Start with a sample article
-          <ArrowRight className="h-4 w-4" aria-hidden />
-        </motion.button>
+          <Link
+            to={PREMIUM_ARTICLE_HREF}
+            className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold text-white"
+            style={{
+              borderColor: currentTheme.colors.border,
+              background: `linear-gradient(180deg, ${currentTheme.colors.accentA}, ${currentTheme.colors.accentB})`,
+              boxShadow: `0 16px 38px -22px ${currentTheme.colors.shadowColor}`,
+            }}
+          >
+            Start with a sample article
+            <ArrowRight className="h-4 w-4" aria-hidden />
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   );

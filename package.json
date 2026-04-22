@@ -9,10 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@amsborse/cosmic-ui": "^0.0.1",
     "framer-motion": "^11.18.2",
     "lucide-react": "^0.488.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.14.2"
   },
   "devDependencies": {
     "@types/node": "^22.19.17",

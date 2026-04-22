@@ -74,7 +74,7 @@ export const themeConfig: Record<
       textSecondary: "rgba(255,255,255,0.62)",
       surface: "rgba(255,255,255,0.05)",
       surfaceStrong: "rgba(255,255,255,0.08)",
-      border: "rgba(255,255,255,0.10)",
+      border: "rgba(255,255,255,0.1)",
       accentA: "#6366f1",
       accentB: "#60a5fa",
       accentC: "#2dd4bf",
