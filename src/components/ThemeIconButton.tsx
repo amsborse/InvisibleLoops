@@ -37,7 +37,7 @@ export function ThemeIconButton() {
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={mode}
-          initial={{ opacity: 0, rotate: -currentTheme.motion.iconRotate, scale: 0.88 }}
+          initial={false}
           animate={{ opacity: 1, rotate: 0, scale: 1 }}
           exit={{ opacity: 0, rotate: currentTheme.motion.iconRotate, scale: 0.88 }}
           transition={{ duration: currentTheme.motion.medium, ease: currentTheme.motion.ease }}

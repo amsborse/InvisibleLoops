@@ -10,7 +10,7 @@ type SceneSelectorProps = {
 export function SceneSelector({ activeIndex, onSelect }: SceneSelectorProps) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 12 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className="relative rounded-[2rem] border p-6 backdrop-blur-xl sm:p-8"

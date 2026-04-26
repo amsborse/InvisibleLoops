@@ -16,7 +16,7 @@ export function ReadingPanel({ scene }: ReadingPanelProps) {
       <AnimatePresence mode="wait" initial={false}>
         <motion.article
           key={scene.id}
-          initial={{ opacity: 0, y: 20 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -14 }}
           transition={{ duration: currentTheme.motion.medium, ease: currentTheme.motion.ease }}

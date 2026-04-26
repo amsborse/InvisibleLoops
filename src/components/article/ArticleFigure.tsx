@@ -119,7 +119,7 @@ export function ArticleFigure({ src, alt, caption }: ArticleFigureProps) {
         {open && !loadError ? (
           <motion.div
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: EASE }}
@@ -134,7 +134,7 @@ export function ArticleFigure({ src, alt, caption }: ArticleFigureProps) {
               onClick={close}
               className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border text-white outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               style={{ borderColor: "rgba(255,255,255,0.25)", background: "rgba(0,0,0,0.4)" }}
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={false}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", stiffness: 400, damping: 28 }}
@@ -144,7 +144,7 @@ export function ArticleFigure({ src, alt, caption }: ArticleFigureProps) {
             </motion.button>
             <motion.div
               className="relative z-[1] max-h-[90vh] max-w-[min(100%,1200px)] p-0"
-              initial={{ scale: 0.96, opacity: 0 }}
+              initial={false}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.96, opacity: 0 }}
               transition={{ type: "spring", stiffness: 320, damping: 32, mass: 0.4 }}

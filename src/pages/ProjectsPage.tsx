@@ -9,7 +9,7 @@ export default function ProjectsPage() {
     <div className="flex flex-col gap-12 lg:gap-14">
       <header aria-labelledby="projects-heading">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
           className="inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] backdrop-blur"
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
 
         <motion.h1
           id="projects-heading"
-          initial={{ opacity: 0, y: 22 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.05 }}
           className="mt-6 font-display text-4xl font-semibold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.2rem]"
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
           className="mt-5 max-w-2xl text-pretty text-base leading-8 sm:text-lg"

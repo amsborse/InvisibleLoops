@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { HomeHeroFluidNav } from "../components/landing/HomeHeroFluidNav";
 import { HeroInfinityVisual } from "../components/landing/HeroInfinityVisual";
 import { PREMIUM_ARTICLE_HREF } from "../data/premiumArticle";
 
@@ -15,7 +16,7 @@ export default function HomePage() {
     >
       <div>
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
           className="inline-flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.3em] backdrop-blur"
@@ -31,7 +32,7 @@ export default function HomePage() {
 
         <motion.h1
           id="home-hero-heading"
-          initial={{ opacity: 0, y: 22 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.04 }}
           className="mt-6 text-balance font-display text-4xl font-semibold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem]"
@@ -51,7 +52,7 @@ export default function HomePage() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
           className="mt-6 max-w-xl text-pretty text-base leading-8 sm:text-lg"
@@ -61,8 +62,10 @@ export default function HomePage() {
           writing: visual revelation, emotional timing, high-clarity motion.
         </motion.p>
 
+        <HomeHeroFluidNav />
+
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.16 }}
           className="mt-10 flex flex-wrap items-center gap-3"
@@ -95,7 +98,7 @@ export default function HomePage() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 28, scale: 0.97 }}
+        initial={false}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.75, ease: EASE, delay: 0.1 }}
       >

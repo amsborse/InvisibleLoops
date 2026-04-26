@@ -12,7 +12,7 @@ export function Hero() {
     <section id="experience" className="mx-auto grid w-full max-w-[88rem] gap-10 px-5 pb-16 pt-12 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-14 lg:px-10 lg:pb-24">
       <div>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: currentTheme.motion.medium, ease: currentTheme.motion.ease }}
           className="inline-flex items-center rounded-full border px-4 py-2 text-[11px] font-medium uppercase tracking-[0.24em]"
@@ -27,7 +27,7 @@ export function Hero() {
 
         <motion.h1
           id="hero-heading"
-          initial={{ opacity: 0, y: 22 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: currentTheme.motion.slow, ease: currentTheme.motion.ease }}
           className="mt-5 text-balance font-display text-4xl font-semibold tracking-[-0.03em] sm:text-5xl lg:text-[3.6rem] lg:leading-[1.02]"
@@ -45,7 +45,7 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: currentTheme.motion.slow + 0.08, ease: currentTheme.motion.ease }}
           className="mt-6 max-w-2xl text-pretty text-base leading-8 sm:text-lg"
@@ -55,7 +55,7 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: currentTheme.motion.slow + 0.12, ease: currentTheme.motion.ease }}
           className="mt-10 flex flex-wrap gap-4"
@@ -89,7 +89,7 @@ export function Hero() {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 26, scale: 0.96 }}
+        initial={false}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: currentTheme.motion.slow + 0.2, ease: currentTheme.motion.ease }}
         className="relative"

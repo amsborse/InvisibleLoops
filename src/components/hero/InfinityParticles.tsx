@@ -72,7 +72,7 @@ export function InfinityParticles({ points, currentTheme, isDayThinking }: Infin
           cy={particle.y}
           r={particle.size}
           fill={particleColor}
-          initial={{ opacity: 0, scale: 0.88 }}
+          initial={false}
           animate={{
             opacity: [particle.opacity * 0.55, particle.opacity, particle.opacity * 0.55],
             scale: [0.88, 1.08, 0.88],

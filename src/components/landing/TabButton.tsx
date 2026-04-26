@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { NavLink } from "react-router-dom";
+import { SIDEBAR_ACTIVE_SPRING } from "../../motion/navigationFluid";
+import { SidebarActiveWaterField } from "./SidebarWaterHighlight";
 
 type TabButtonProps = {
   index: number;
@@ -34,44 +36,26 @@ export function TabButton({
       role="tab"
       className={[
         "group relative block w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--accent-ring)]",
-        isVertical ? "rounded-2xl py-0.5" : "shrink-0 min-h-0 overflow-hidden rounded-xl",
+        isVertical ? "rounded-2xl py-0.5" : "shrink-0 min-h-0 overflow-visible rounded-xl",
       ]
         .filter(Boolean)
         .join(" ")}
     >
       {({ isActive }) => (
         <div
-          className={isVertical ? "relative overflow-hidden rounded-2xl py-1.5 pl-0 pr-0" : "relative px-0 py-0"}
+          className={
+            isVertical
+              ? "relative overflow-visible rounded-2xl py-1.5 pl-0 pr-0"
+              : "relative overflow-visible rounded-xl px-0 py-0"
+          }
         >
           {isVertical && isActive ? (
-            <motion.div
-              layoutId={layoutId}
-              className="absolute inset-0 rounded-2xl"
-              style={{
-                background: "color-mix(in srgb, var(--accent) 10%, #0a0c12)",
-                border: "1px solid color-mix(in srgb, var(--accent) 38%, var(--border))",
-                boxShadow:
-                  "0 0 0 1px color-mix(in srgb, var(--accent) 10%, transparent), 0 10px 36px -18px var(--accent-glow), inset 0 1px 0 color-mix(in srgb, var(--highlight) 12%, transparent)",
-              }}
-              transition={{ type: "spring", stiffness: 400, damping: 32, mass: 0.5 }}
-            />
-          ) : null}
-          {isVertical && isActive ? (
-            <motion.span
-              layoutId={`${layoutId}-tab-line`}
-              className="absolute bottom-3 left-0 top-3 w-[3px] rounded-full"
-              style={{
-                background: "linear-gradient(180deg, var(--accent) 0%, #818cf8 100%)",
-                boxShadow: "0 0 10px color-mix(in srgb, var(--accent-glow) 45%, transparent)",
-              }}
-              transition={{ type: "spring", stiffness: 420, damping: 34, mass: 0.45 }}
-              aria-hidden
-            />
+            <SidebarActiveWaterField layoutId={layoutId} transition={SIDEBAR_ACTIVE_SPRING} size="full" />
           ) : null}
           {isVertical ? (
             <motion.span
               whileTap={{ scale: 0.99 }}
-              className="relative z-[1] flex w-full min-w-0 items-start gap-2.5 px-1.5"
+              className="relative z-[3] flex w-full min-w-0 items-start gap-2.5 px-1.5"
             >
               <span
                 className="w-7 shrink-0 pt-0.5 text-left text-[11px] font-bold tabular-nums sm:text-xs"
@@ -124,19 +108,10 @@ export function TabButton({
           ) : (
             <motion.span
               whileTap={{ scale: 0.98 }}
-              className="relative z-[1] flex items-center justify-center gap-1.5 px-3.5 py-2.5"
+              className="relative z-[3] flex items-center justify-center gap-1.5 px-3.5 py-2.5"
             >
               {isActive ? (
-                <motion.span
-                  layoutId={layoutId}
-                  className="absolute inset-0 rounded-xl"
-                  style={{
-                    background: "color-mix(in srgb, var(--accent) 9%, var(--bg))",
-                    border: "1px solid color-mix(in srgb, var(--accent) 32%, var(--border))",
-                    boxShadow: "0 8px 28px -16px var(--accent-glow)",
-                  }}
-                  transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                />
+                <SidebarActiveWaterField layoutId={layoutId} transition={SIDEBAR_ACTIVE_SPRING} size="compact" />
               ) : null}
               <span
                 className="relative z-[1] flex h-7 w-7 items-center justify-center rounded-lg border"

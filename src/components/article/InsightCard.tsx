@@ -11,7 +11,7 @@ export function InsightCard({ index, text, active }: InsightCardProps) {
   return (
     <motion.li
       layout
-      initial={{ opacity: 0, y: 4 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.32, delay: index * 0.03, ease: [0.22, 1, 0.36, 1] }}
       className="m-0 list-none pl-0"

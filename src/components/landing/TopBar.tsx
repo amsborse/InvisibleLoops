@@ -24,7 +24,7 @@ export function TopBar() {
       {/* Breadcrumb / brand context */}
       <div className="flex min-w-0 items-center gap-3">
         <motion.div
-          initial={{ opacity: 0, y: -4 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, ease: EASE }}
           className="hidden items-center gap-2 rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] sm:inline-flex"
@@ -45,7 +45,7 @@ export function TopBar() {
 
         <motion.span
           key={pageLabel}
-          initial={{ opacity: 0, y: 5 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45, ease: EASE }}
           className="truncate text-sm font-medium tracking-tight"

@@ -1,9 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
 import { Outlet, useLocation } from "react-router-dom";
 import { SidebarNav } from "./SidebarNav";
 import { TopBar } from "./TopBar";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
 
 export function Layout() {
   const location = useLocation();
@@ -38,7 +35,7 @@ export function Layout() {
 
         <main
           id="main"
-          className="relative min-w-0 flex-1 overflow-hidden rounded-[2rem] border backdrop-blur-xl"
+          className="relative flex min-h-0 min-w-0 flex-1 flex-col overflow-x-hidden overflow-y-auto rounded-[2rem] border backdrop-blur-xl"
           style={{
             borderColor: "var(--border)",
             background: "var(--panel-gradient)",
@@ -55,20 +52,15 @@ export function Layout() {
             }}
           />
 
-          <TopBar />
+          <div className="shrink-0">
+            <TopBar />
+          </div>
 
-          <div className="px-5 pb-14 pt-8 sm:px-8 sm:pb-16 sm:pt-10 lg:px-14 lg:pb-20 lg:pt-12">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={location.pathname}
-                initial={{ opacity: 0, y: 14, scale: 0.995 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -10, scale: 0.995 }}
-                transition={{ duration: 0.45, ease: EASE }}
-              >
-                <Outlet />
-              </motion.div>
-            </AnimatePresence>
+          <div className="min-h-0 flex-1 px-5 pb-14 pt-8 sm:px-8 sm:pb-16 sm:pt-10 lg:px-14 lg:pb-20 lg:pt-12">
+            {/* Remount on navigate; Framer AnimatePresence around Outlet could leave opacity 0 in dev. */}
+            <div key={location.pathname} className="w-full min-w-0">
+              <Outlet />
+            </div>
           </div>
         </main>
       </div>

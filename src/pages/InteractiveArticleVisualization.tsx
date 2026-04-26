@@ -338,9 +338,9 @@ export default function InteractiveArticleVisualization() {
           <motion.div className="absolute inset-0" animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }} transition={{ duration: 18, repeat: Infinity, ease: "linear" }} style={{ backgroundImage: "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.08) 0, transparent 28%), radial-gradient(circle at 80% 30%, rgba(255,200,120,0.12) 0, transparent 24%), radial-gradient(circle at 45% 70%, rgba(120,190,255,0.12) 0, transparent 28%)", backgroundSize: "180% 180%" }} />
           <div className="relative grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
             <div>
-              <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/65"><Orbit className="h-3.5 w-3.5" />Article Experience</motion.div>
-              <motion.h1 initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }} className="mt-5 max-w-4xl text-4xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">No one is coming to save you.</motion.h1>
-              <motion.p initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.12 }} className="mt-5 max-w-2xl text-base leading-7 text-white/72 md:text-lg">This is not a lesson. It is a mirror. The page should move like thought itself—arriving, resisting, revealing. Read slowly enough to notice where it recognizes you.</motion.p>
+              <motion.div initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs uppercase tracking-[0.3em] text-white/65"><Orbit className="h-3.5 w-3.5" />Article Experience</motion.div>
+              <motion.h1 initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.05 }} className="mt-5 max-w-4xl text-4xl font-semibold leading-[0.98] md:text-6xl lg:text-7xl">No one is coming to save you.</motion.h1>
+              <motion.p initial={false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.12 }} className="mt-5 max-w-2xl text-base leading-7 text-white/72 md:text-lg">This is not a lesson. It is a mirror. The page should move like thought itself—arriving, resisting, revealing. Read slowly enough to notice where it recognizes you.</motion.p>
             </div>
             <TiltCard className="relative mx-auto w-full max-w-xl rounded-[2rem]">
               <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/10 to-white/[0.02] blur-2xl" />
@@ -348,7 +348,7 @@ export default function InteractiveArticleVisualization() {
                 <div className="flex items-center justify-between border-b border-white/10 pb-4"><div><div className="text-xs uppercase tracking-[0.25em] text-white/40">Reading pulse</div><div className="mt-2 text-xl font-medium">How the article should move</div></div><Flame className="h-5 w-5 text-white/60" /></div>
                 <div className="mt-5 space-y-3">
                   {["Big emotional opening first", "Section clicks should scroll, not just highlight", "Hover should reveal meaning, not just change opacity", "Diagnostic tiles should morph when pressed", "The page should feel alive under the cursor"].map((item, index) => (
-                    <motion.div key={item} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + index * 0.08 }} whileHover={{ x: 8, backgroundColor: "rgba(255,255,255,0.06)" }} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white/70">{item}</motion.div>
+                    <motion.div key={item} initial={false} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + index * 0.08 }} whileHover={{ x: 8, backgroundColor: "rgba(255,255,255,0.06)" }} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-white/70">{item}</motion.div>
                   ))}
                 </div>
               </div>
@@ -383,7 +383,7 @@ export default function InteractiveArticleVisualization() {
               })}
             </div>
             <AnimatePresence mode="wait">
-              <motion.div key={activeTrapCard.id} initial={{ opacity: 0, y: 18, filter: "blur(4px)", scale: 0.985 }} animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }} exit={{ opacity: 0, y: -12, filter: "blur(4px)", scale: 0.985 }} transition={{ duration: 0.28 }} className="mt-6 overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#08131d]">
+              <motion.div key={activeTrapCard.id} initial={false} animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }} exit={{ opacity: 0, y: -12, filter: "blur(4px)", scale: 0.985 }} transition={{ duration: 0.28 }} className="mt-6 overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#08131d]">
                 <div className="border-b border-white/10 bg-gradient-to-r from-white/[0.05] to-transparent px-5 py-4"><div className="text-xs uppercase tracking-[0.24em] text-white/40">Selected pattern</div><div className="mt-2 text-2xl font-medium">{activeTrapCard.title}</div></div>
                 <div className="grid gap-0 md:grid-cols-[0.9fr_1.1fr]"><motion.div layout className="border-r border-white/10 p-5"><div className="text-xs uppercase tracking-[0.22em] text-white/35">How it feels</div><p className="mt-3 text-sm leading-7 text-white/68">{activeTrapCard.summary}</p></motion.div><motion.div layout className="p-5"><div className="flex items-start gap-3"><Quote className="mt-1 h-4 w-4 text-white/35" /><p className="text-sm leading-7 text-white/68">{activeTrapCard.detail}</p></div></motion.div></div>
               </motion.div>
@@ -396,14 +396,14 @@ export default function InteractiveArticleVisualization() {
               {practiceSteps.map((step, index) => {
                 const active = hoveredStep === index;
                 return (
-                  <motion.div key={step.title} onHoverStart={() => setHoveredStep(index)} onHoverEnd={() => setHoveredStep(null)} initial={{ opacity: 0, x: 12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: index * 0.03 }} className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08131d] px-4 py-4">
+                  <motion.div key={step.title} onHoverStart={() => setHoveredStep(index)} onHoverEnd={() => setHoveredStep(null)} initial={false} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: index * 0.03 }} className="group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#08131d] px-4 py-4">
                     <motion.div className="absolute inset-y-0 left-0 w-1 rounded-full bg-white/60" animate={{ opacity: active ? 1 : 0.18, scaleY: active ? 1 : 0.45 }} transition={{ duration: 0.2 }} />
                     <motion.div className="absolute inset-0 bg-gradient-to-r from-white/[0.06] to-transparent" animate={{ opacity: active ? 1 : 0 }} />
                     <div className="relative flex items-center justify-between gap-4 pl-3">
                       <div>
                         <div className="text-[11px] uppercase tracking-[0.2em] text-white/32">Step {String(index + 1).padStart(2, "0")}</div>
                         <p className={`mt-1 text-sm leading-6 transition-colors ${active ? "text-white" : "text-white/66"}`}>{step.title}</p>
-                        <AnimatePresence>{active ? <motion.p initial={{ opacity: 0, height: 0, y: 4 }} animate={{ opacity: 1, height: "auto", y: 0 }} exit={{ opacity: 0, height: 0, y: 4 }} className="mt-2 overflow-hidden text-xs leading-6 text-white/46">{step.hint}</motion.p> : null}</AnimatePresence>
+                        <AnimatePresence>{active ? <motion.p initial={false} animate={{ opacity: 1, height: "auto", y: 0 }} exit={{ opacity: 0, height: 0, y: 4 }} className="mt-2 overflow-hidden text-xs leading-6 text-white/46">{step.hint}</motion.p> : null}</AnimatePresence>
                       </div>
                       <motion.div animate={{ x: active ? 6 : 0, scale: active ? 1.05 : 1 }} transition={{ duration: 0.18 }}><ArrowRight className={`h-4 w-4 ${active ? "text-white" : "text-white/30"}`} /></motion.div>
                     </div>
@@ -415,7 +415,7 @@ export default function InteractiveArticleVisualization() {
         </section>
 
         <TiltCard className="mt-10 overflow-hidden rounded-[2.5rem] border border-white/10 bg-gradient-to-br from-white/[0.06] to-white/[0.02] px-6 py-10 md:px-10 md:py-14">
-          <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }} className="mx-auto max-w-4xl text-center">
+          <motion.div initial={false} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.55 }} className="mx-auto max-w-4xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1 text-xs uppercase tracking-[0.25em] text-white/50"><Eye className="h-3.5 w-3.5" />Final echo</div>
             <h3 className="mt-6 text-3xl font-semibold leading-tight md:text-5xl">The ending should leave the reader with a quiet, irreversible shift.</h3>
             <p className="mt-5 text-lg leading-8 text-white/72">Not how impressive they look. Not how much approval they collect. Only this—can you sit alone with yourself and not feel like you are pretending?</p>

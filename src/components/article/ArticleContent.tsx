@@ -163,7 +163,7 @@ function BlockHeading({ level, text }: { level: 2 | 3; text: string }) {
 function BlockQuote({ text, attribution }: { text: string; attribution?: string }) {
   return (
     <motion.figure
-      initial={{ opacity: 0, y: 12 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.35 }}
       transition={{ duration: 0.5, ease: EASE }}
@@ -196,7 +196,7 @@ function BlockQuote({ text, attribution }: { text: string; attribution?: string 
 function BlockCallout({ title, text }: { title: string; text: string }) {
   return (
     <motion.aside
-      initial={{ opacity: 0, y: 10 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.45, ease: EASE }}

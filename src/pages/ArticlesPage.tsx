@@ -16,14 +16,14 @@ export default function ArticlesPage() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.985 }}
+      initial={false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6, ease: EASE }}
       className="flex flex-col gap-10 lg:gap-14"
     >
       <header aria-labelledby="articles-heading">
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
           className="flex flex-wrap items-center justify-between gap-4"
@@ -60,7 +60,7 @@ export default function ArticlesPage() {
 
         <motion.h1
           id="articles-heading"
-          initial={{ opacity: 0, y: 22 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.05 }}
           className="mt-6 max-w-4xl text-balance font-display text-4xl font-semibold leading-[1.04] tracking-[-0.03em] sm:text-5xl lg:text-[3.2rem]"
@@ -81,7 +81,7 @@ export default function ArticlesPage() {
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 18 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
           className="mt-5 max-w-2xl text-pretty text-base leading-8 sm:text-lg"
@@ -91,7 +91,7 @@ export default function ArticlesPage() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 14 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.55, ease: EASE, delay: 0.12 }}
           className="mt-10 rounded-[1.75rem] border p-5 sm:p-6"
@@ -137,7 +137,7 @@ export default function ArticlesPage() {
 
         {/* Scene strip — mirrors left panel; high-contrast active for instant scan */}
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: EASE, delay: 0.14 }}
           className="mt-10 max-w-4xl border-t pt-8 sm:mt-12 sm:pt-9"
@@ -169,7 +169,7 @@ export default function ArticlesPage() {
       </header>
 
       <motion.section
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: EASE }}
@@ -181,7 +181,7 @@ export default function ArticlesPage() {
       </motion.section>
 
       <motion.section
-        initial={{ opacity: 0, y: 22 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.6, ease: EASE }}

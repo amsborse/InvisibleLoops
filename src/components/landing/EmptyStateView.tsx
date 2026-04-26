@@ -14,7 +14,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 export function EmptyStateView({ icon: Icon, eyebrow, title, description, cta }: EmptyStateViewProps) {
   return (
     <motion.section
-      initial={{ opacity: 0, y: 18 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: EASE }}
       className="relative mx-auto flex max-w-3xl flex-col items-center overflow-hidden rounded-[2.25rem] border px-8 py-20 text-center backdrop-blur-xl sm:px-14 sm:py-24"

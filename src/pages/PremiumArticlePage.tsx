@@ -23,7 +23,6 @@ export default function PremiumArticlePage() {
 
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
   const insightRefs = useRef<Record<number, HTMLElement | null>>({});
-  const scrollAnimationFrame = useRef<number | null>(null);
   const activeSectionIdRef = useRef(article.sections[0]?.id ?? "");
 
   const registerSectionRef = useCallback((id: string, el: HTMLElement | null) => {
@@ -95,7 +94,7 @@ export default function PremiumArticlePage() {
         }
       }
 
-      const hysteresis = 72;
+      const hysteresis = 20;
       if (bestId !== activeSectionIdRef.current && bestScore < currentScore + hysteresis) {
         bestId = activeSectionIdRef.current;
       }
@@ -117,7 +116,7 @@ export default function PremiumArticlePage() {
       {
         root: null,
         threshold: [0, 0.08, 0.16, 0.24, 0.35, 0.5, 0.7, 1],
-        rootMargin: "-18% 0px -52% 0px",
+        rootMargin: "-12% 0px -58% 0px",
       },
     );
 
@@ -171,52 +170,14 @@ export default function PremiumArticlePage() {
     };
   }, [article.keyInsights.length, focusMode]);
 
-  useEffect(() => {
-    return () => {
-      if (scrollAnimationFrame.current !== null) {
-        window.cancelAnimationFrame(scrollAnimationFrame.current);
-      }
-    };
-  }, []);
-
   const scrollToSection = useCallback((id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
+    activeSectionIdRef.current = id;
+    setActiveSectionId(id);
     const navOffset = SECTION_ANCHOR_OFFSET;
     const targetY = Math.max(0, el.getBoundingClientRect().top + window.scrollY - navOffset);
-    const prefersReduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduce) {
-      window.scrollTo({ top: targetY, behavior: "auto" });
-      return;
-    }
-
-    if (scrollAnimationFrame.current !== null) {
-      window.cancelAnimationFrame(scrollAnimationFrame.current);
-      scrollAnimationFrame.current = null;
-    }
-
-    const startY = window.scrollY;
-    const distance = targetY - startY;
-    if (Math.abs(distance) < 2) return;
-
-    const duration = Math.min(700, Math.max(360, Math.abs(distance) * 0.42));
-    const startTime = performance.now();
-    const easeInOutCubic = (t: number) =>
-      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-    const step = (now: number) => {
-      const elapsed = now - startTime;
-      const p = Math.min(1, elapsed / duration);
-      const eased = easeInOutCubic(p);
-      window.scrollTo({ top: startY + distance * eased, behavior: "auto" });
-      if (p < 1) {
-        scrollAnimationFrame.current = window.requestAnimationFrame(step);
-      } else {
-        scrollAnimationFrame.current = null;
-      }
-    };
-
-    scrollAnimationFrame.current = window.requestAnimationFrame(step);
+    window.scrollTo({ top: targetY, behavior: "auto" });
   }, []);
 
   return (
@@ -265,9 +226,9 @@ export default function PremiumArticlePage() {
         onToggleFocus={() => setFocusMode((v) => !v)}
       />
 
-      <main className="relative mx-auto min-h-0 max-w-[1440px] px-4 pb-32 pt-6 sm:px-6 lg:px-10 lg:pt-12">
+      <main className="relative z-[2] mx-auto min-h-0 max-w-[1440px] px-4 pb-32 pt-6 sm:px-6 lg:px-10 lg:pt-12">
         <motion.header
-          initial={{ opacity: 0, y: 28 }}
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: EASE }}
           className="mx-auto mb-16 max-w-[40rem] text-center sm:mb-20 lg:mb-24"

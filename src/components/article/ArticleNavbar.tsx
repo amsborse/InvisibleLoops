@@ -13,7 +13,7 @@ type ArticleNavbarProps = {
 export function ArticleNavbar({ progress, focusMode, onToggleFocus }: ArticleNavbarProps) {
   return (
     <motion.header
-      initial={{ y: -8, opacity: 0 }}
+      initial={false}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       className="premium-article sticky top-0 z-50 border-b"

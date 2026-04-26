@@ -1,24 +1,7 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import { PremiumInteractiveNavRail } from "../navigation";
 import type { ArticleSection } from "../../data/premiumArticle";
-
-const EASE = [0.22, 1, 0.36, 1] as const;
-const MOTION_PRESET: "luxury" | "crisp" = "luxury";
-
-const MOTION_TUNING = {
-  luxury: {
-    rail: { stiffness: 210, damping: 32, mass: 0.62 },
-    indicator: { stiffness: 260, damping: 30, mass: 0.62 },
-    hoverX: 1.25,
-    hoverDuration: 0.24,
-  },
-  crisp: {
-    rail: { stiffness: 300, damping: 36, mass: 0.46 },
-    indicator: { stiffness: 360, damping: 36, mass: 0.5 },
-    hoverX: 1.5,
-    hoverDuration: 0.18,
-  },
-} as const;
 
 type ArticleTableOfContentsProps = {
   sections: ArticleSection[];
@@ -26,6 +9,8 @@ type ArticleTableOfContentsProps = {
   pageProgress?: number;
   onNavigate: (id: string) => void;
 };
+
+const ARTICLE_TOC_ROW_HEIGHT = 60;
 
 /**
  * Editorial table of contents: typography-first, high contrast, no “widget card” chrome.
@@ -38,38 +23,10 @@ export function ArticleTableOfContents({
   pageProgress = 0,
   onNavigate,
 }: ArticleTableOfContentsProps) {
-  const motionConfig = MOTION_TUNING[MOTION_PRESET];
   const clampedPageProgress = Math.min(1, Math.max(0, pageProgress));
   const scrollWrapRef = useRef<HTMLDivElement | null>(null);
-  const railContentRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const [indicator, setIndicator] = useState({ top: 0, height: 52, opacity: 0 });
-
-  useEffect(() => {
-    const updateIndicator = () => {
-      const idx = sections.findIndex((s) => s.id === activeId);
-      const activeEl = idx >= 0 ? itemRefs.current[idx] : null;
-      const contentEl = railContentRef.current;
-      if (!activeEl || !contentEl) return;
-
-      const itemRect = activeEl.getBoundingClientRect();
-      const contentRect = contentEl.getBoundingClientRect();
-      const top = itemRect.top - contentRect.top;
-      setIndicator({ top, height: itemRect.height, opacity: 1 });
-    };
-
-    const raf = window.requestAnimationFrame(updateIndicator);
-    const onResize = () => updateIndicator();
-    const scrollEl = scrollWrapRef.current;
-    scrollEl?.addEventListener("scroll", onResize, { passive: true });
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      window.cancelAnimationFrame(raf);
-      scrollEl?.removeEventListener("scroll", onResize);
-      window.removeEventListener("resize", onResize);
-    };
-  }, [activeId, sections]);
+  const activeIndex = Math.max(sections.findIndex((s) => s.id === activeId), 0);
 
   useEffect(() => {
     const idx = sections.findIndex((s) => s.id === activeId);
@@ -77,8 +34,18 @@ export function ArticleTableOfContents({
     const scrollEl = scrollWrapRef.current;
     if (!activeEl || !scrollEl) return;
 
-    // Keep the active TOC row near center for long jumps.
-    activeEl.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    // Prevent jank while scrolling the page: only adjust when row is outside the visible rail.
+    const rowTop = activeEl.offsetTop;
+    const rowBottom = rowTop + activeEl.offsetHeight;
+    const viewTop = scrollEl.scrollTop;
+    const viewBottom = viewTop + scrollEl.clientHeight;
+    const pad = 14;
+
+    if (rowTop < viewTop + pad) {
+      scrollEl.scrollTo({ top: Math.max(0, rowTop - pad), behavior: "auto" });
+    } else if (rowBottom > viewBottom - pad) {
+      scrollEl.scrollTo({ top: rowBottom - scrollEl.clientHeight + pad, behavior: "auto" });
+    }
   }, [activeId, sections]);
 
   return (
@@ -117,71 +84,55 @@ export function ArticleTableOfContents({
         ref={scrollWrapRef}
         className="relative mt-7 min-h-0 flex-1 basis-0 overflow-y-auto overflow-x-hidden overscroll-y-contain pr-1 [scrollbar-gutter:stable] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--article-rail-dim)_70%,var(--bg))_transparent]"
       >
-        <div ref={railContentRef} className="relative min-h-full">
-          <motion.div
-            className="pointer-events-none absolute left-5 right-0 z-0 rounded-[10px] will-change-transform"
-            style={{
-              background:
-                "linear-gradient(90deg, color-mix(in srgb, var(--accent) 10%, transparent), transparent 86%)",
-              boxShadow:
-                "inset 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent), 0 0 18px color-mix(in srgb, var(--accent) 20%, transparent)",
-            }}
-            animate={{
-              y: indicator.top,
-              height: indicator.height,
-              opacity: indicator.opacity,
-            }}
-            transition={{
-              type: "spring",
-              ...motionConfig.indicator,
-            }}
-            aria-hidden
-          />
-
-          <ol className="relative z-[1] list-none space-y-0.5 pl-5">
-            {sections.map((s, i) => {
-              const active = activeId === s.id;
-              return (
-                <li key={s.id} className="m-0 p-0">
-                  <motion.button
-                    type="button"
-                    ref={(el) => {
-                      itemRefs.current[i] = el;
-                    }}
-                    onClick={() => onNavigate(s.id)}
-                    className="group w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-[var(--bg)]"
-                    whileHover={!active ? { x: motionConfig.hoverX } : undefined}
-                    transition={{ duration: motionConfig.hoverDuration, ease: EASE }}
+        <PremiumInteractiveNavRail
+          items={sections}
+          activeIndex={activeIndex}
+          itemHeight={ARTICLE_TOC_ROW_HEIGHT}
+          itemCenterOffset={30}
+          railClassName="left-5 h-[3.75rem] w-[calc(100%-1.25rem)] rounded-xl"
+          className="min-h-full"
+          renderItem={({ item: s, index: i, isActive, pull }) => (
+            <div key={s.id} className="relative z-[1] pl-5">
+              <motion.button
+                type="button"
+                ref={(el) => {
+                  itemRefs.current[i] = el;
+                }}
+                onClick={() => onNavigate(s.id)}
+                className="group w-full text-left outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[color:var(--accent-ring)] focus-visible:ring-offset-[var(--bg)]"
+                whileTap={{ scale: 0.995 }}
+                animate={{
+                  x: isActive ? 5 : pull * 2.5,
+                  scale: isActive ? 1.015 : 1 + pull * 0.01,
+                  opacity: isActive ? 1 : 0.58 + pull * 0.3,
+                }}
+                whileHover={!isActive ? { x: 3.5, opacity: 0.94 } : { x: 5.5 }}
+                transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              >
+                <div
+                  className="relative flex h-[3.75rem] items-center gap-3 pl-4 pr-1 transition-all duration-200 ease-out"
+                  style={{ background: "transparent" }}
+                >
+                  <span
+                    className="w-7 shrink-0 text-[13px] font-semibold tabular-nums sm:text-sm"
+                    style={{ color: isActive ? "var(--accent-ink)" : "var(--article-nav-dim)" }}
                   >
-                    <div
-                      className="relative flex items-baseline gap-3 border-l-[3px] py-2.5 pl-4 pr-1 transition-all duration-200 ease-out"
-                      style={{
-                        borderColor: active ? "var(--accent)" : "transparent",
-                        background: "transparent",
-                      }}
-                    >
-                      <span
-                        className="w-7 shrink-0 text-[13px] font-semibold tabular-nums sm:text-sm"
-                        style={{ color: active ? "var(--accent-ink)" : "var(--article-nav-dim)" }}
-                      >
-                        {i + 1}
-                      </span>
-                      <span
-                        className="min-w-0 flex-1 text-[15px] font-medium leading-[1.35] tracking-[-0.015em] sm:text-base sm:leading-snug"
-                        style={{
-                          color: active ? "var(--text-primary)" : "var(--article-nav)",
-                          fontWeight: active ? 600 : 500,
-                        }}
-                      >
-                        {s.title}
-                      </span>
-                    </div>
-                  </motion.button>
-                </li>
-              );
-            })}
-          </ol>
-        </div>
+                    {i + 1}
+                  </span>
+                  <span
+                    className="min-w-0 flex-1 text-[15px] font-medium leading-[1.35] tracking-[-0.015em] sm:text-base sm:leading-snug"
+                    style={{
+                      color: isActive ? "var(--text-primary)" : "var(--article-nav)",
+                      fontWeight: isActive ? 600 : 500,
+                    }}
+                  >
+                    {s.title}
+                  </span>
+                </div>
+              </motion.button>
+            </div>
+          )}
+        />
       </div>
     </nav>
   );
